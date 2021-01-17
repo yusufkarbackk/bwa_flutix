@@ -18,4 +18,4 @@ TextStyle greyTextFont = GoogleFonts.raleway()
 
 TextStyle whiteNumberFont =
     GoogleFonts.openSans().copyWith(color: Colors.black);
-TextStyle yelloNumberFont = GoogleFonts.raleway().copyWith(color: Colors.black);
+TextStyle yellowNumberFont = GoogleFonts.openSans().copyWith(color: Color(0xFFFBD460));
