@@ -15,7 +15,7 @@ class AuthServices {
         selectedLanguage: selectedLanguage,
       );
 
-      await UserServices.makeFireStore(user);
+      await UserServices.updateUser(user);
 
       return SignInSignUpResult(user: user);
     } catch (e) {

@@ -14,6 +14,14 @@ class MoviePage extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 30),
         child: BlocBuilder<UserBloc, UserState>(builder: (_, userState) {
           if (userState is UserLoaded) {
+            if (imageFileToUpload != null) {
+              uploadImage(imageFileToUpload).then((downloadURL) {
+                imageFileToUpload = null;
+                context
+                    .bloc<UserBloc>()
+                    .add(UpdateData(profileImage: downloadURL));
+              });
+            }
             return Row(
               children: [
                 Container(
@@ -57,7 +65,10 @@ class MoviePage extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.clip)),
                     Text(
-                        NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "IDR ")
+                        NumberFormat.currency(
+                                locale: "id_ID",
+                                decimalDigits: 0,
+                                symbol: "IDR ")
                             .format(userState.user.balance),
                         style: yellowNumberFont.copyWith(
                             fontSize: 14, fontWeight: FontWeight.w400))
@@ -72,7 +83,84 @@ class MoviePage extends StatelessWidget {
             );
           }
         }),
-      )
+      ),
+      Container(
+        margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+        child: Text("Now Playing",
+            style: blackTextFont.copyWith(
+                fontSize: 18, fontWeight: FontWeight.bold)),
+      ),
+      SizedBox(
+        height: 140,
+        child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
+          if (movieState is MovieLoaded) {
+            List<Movie> movies = movieState.movies.sublist(0, 10);
+
+            return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (_, index) => Container(
+                      margin: EdgeInsets.only(
+                          left: (index == 0) ? defaultMargin : 0,
+                          right: (index == movies.length - 1)
+                              ? defaultMargin
+                              : 16),
+                      child: MovieCard(movies[index]),
+                    ));
+          } else {
+            return SpinKitFadingCircle(color: mainColor, size: 50);
+          }
+        }),
+      ),
+      Container(
+        margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+        child: Text("Browse Movies",
+            style: blackTextFont.copyWith(
+                fontSize: 18, fontWeight: FontWeight.bold)),
+      ),
+      BlocBuilder<UserBloc, UserState>(builder: (_, userState) {
+        if (userState is UserLoaded) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                    userState.user.selectedGenres.length,
+                    (index) => BrowseButton(userState.user.selectedGenres[
+                        index]))), //mengirim genre secara satu per satu
+          );
+        } else {
+          return SpinKitFadingCircle(color: mainColor, size: 50);
+        }
+      }),
+      Container(
+        margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+        child: Text("Coming Soon",
+            style: blackTextFont.copyWith(
+                fontSize: 18, fontWeight: FontWeight.bold)),
+      ),
+      SizedBox(
+        height: 100,
+        child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
+          if (movieState is MovieLoaded) {
+            List<Movie> movies = movieState.movies.sublist(10);
+
+            return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: movies.length,
+                itemBuilder: (_, index) => Container(
+                      margin: EdgeInsets.only(
+                          left: (index == 0) ? defaultMargin : 0,
+                          right: (index == movies.length - 1)
+                              ? defaultMargin
+                              : 16),
+                      child: ComingSoonMovieCard(movies[index]),
+                    ));
+          } else {
+            return SpinKitFadingCircle(color: mainColor, size: 50);
+          }
+        }),
+      ),
     ]);
   }
 }

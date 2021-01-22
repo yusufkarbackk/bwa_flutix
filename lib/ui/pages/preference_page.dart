@@ -62,7 +62,43 @@ class _PreferencePageState extends State<PreferencePage> {
                   spacing: 24,
                   runSpacing: 14,
                   children: generateGenreWidgets(context),
-                )
+                ),
+                SizedBox(height: 26),
+                Text("Select your four\nfavorite language",
+                    style: blackTextFont.copyWith(fontSize: 30)),
+                SizedBox(height: 16),
+                Wrap(
+                  spacing: 24,
+                  runSpacing: 14,
+                  children: generateLangWidgets(context),
+                ),
+                SizedBox(height: 16),
+                Center(
+                  child: FloatingActionButton(
+                    child: Icon(Icons.arrow_forward),
+                    backgroundColor: mainColor,
+                    elevation: 0,
+                    onPressed: () {
+                      if (selectedGenres.length != 4) {
+                        Flushbar(
+                          duration: Duration(seconds: 2),
+                          flushbarPosition: FlushbarPosition.TOP,
+                          backgroundColor: Color(0xFFFF5C83),
+                          message: "Please choose 4 favourite genres",
+                        )..show(context);
+                      } else {
+                        widget.registrationData.selectedGenres = selectedGenres;
+                        widget.registrationData.selectedLang = selectedLanguage;
+
+                        context
+                            .bloc<PageBloc>()
+                            .add(GoToAccountConfirmationPage(widget.registrationData));
+                        return;
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(height: 50),
               ],
             )
           ],
@@ -82,6 +118,24 @@ class _PreferencePageState extends State<PreferencePage> {
               isSelected: selectedGenres.contains(e),
               onTap: () {
                 onSelectedGenre(e);
+              },
+            ))
+        .toList();
+  }
+
+  List<Widget> generateLangWidgets(BuildContextcontext) {
+    double width =
+        (MediaQuery.of(context).size.width - 2 * defaultMargin - 24) / 2;
+
+    return widget.languages
+        .map((e) => SelectableBox(
+              e,
+              width: width,
+              isSelected: selectedLanguage.contains(e),
+              onTap: () {
+                setState(() {
+                  selectedLanguage = e;
+                });
               },
             ))
         .toList();
