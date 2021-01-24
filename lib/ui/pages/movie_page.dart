@@ -100,13 +100,18 @@ class MoviePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: movies.length,
                 itemBuilder: (_, index) => Container(
-                      margin: EdgeInsets.only(
-                          left: (index == 0) ? defaultMargin : 0,
-                          right: (index == movies.length - 1)
-                              ? defaultMargin
-                              : 16),
-                      child: MovieCard(movies[index]),
-                    ));
+                    margin: EdgeInsets.only(
+                        left: (index == 0) ? defaultMargin : 0,
+                        right:
+                            (index == movies.length - 1) ? defaultMargin : 16),
+                    child: MovieCard(
+                      movies[index],
+                      onTap: () {
+                        context
+                            .bloc<PageBloc>()
+                            .add(GoToMovieDetailPage(movies[index]));
+                      },
+                    )));
           } else {
             return SpinKitFadingCircle(color: mainColor, size: 50);
           }
@@ -140,7 +145,7 @@ class MoviePage extends StatelessWidget {
                 fontSize: 18, fontWeight: FontWeight.bold)),
       ),
       SizedBox(
-        height: 100,
+        height: 200,
         child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
           if (movieState is MovieLoaded) {
             List<Movie> movies = movieState.movies.sublist(10);
@@ -161,6 +166,26 @@ class MoviePage extends StatelessWidget {
           }
         }),
       ),
+      Container(
+        margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+        child: Text("Get Lucky",
+            style: blackTextFont.copyWith(
+                fontSize: 18, fontWeight: FontWeight.bold)),
+      ),
+      Container(
+        child: Column(
+          children: dummyPromo
+              .map((e) => Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        defaultMargin, 0, defaultMargin, 16),
+                    child: PromoCard(e),
+                  ))
+              .toList(),
+        ),
+      ),
+      SizedBox(
+        height: 100,
+      )
     ]);
   }
 }

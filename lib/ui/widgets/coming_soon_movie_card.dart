@@ -8,7 +8,7 @@ class ComingSoonMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      height: 300,
       width: 140,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
