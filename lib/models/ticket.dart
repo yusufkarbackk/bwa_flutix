@@ -33,11 +33,15 @@ class Ticket extends Equatable {
     String s = '';
 
     for (var seat in seats) {
-      s += ((seat != seats.last) ? ',' : '');
+      s += seat;
+      (seat != seats.last) ? s += ',' : s += '';
     }
+
+    return s;
   }
 
   @override
   // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props =>
+      [movieDetail, theater, time, bookingCode, seats, name, totalPrice ];
 }

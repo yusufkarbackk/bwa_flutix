@@ -18,6 +18,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:random_string/random_string.dart';
+import 'package:bwa_flutix/extensions/extensions.dart';
 
 part 'sign_in_page.dart';
 part 'wrapper.dart';
@@ -30,3 +31,4 @@ part 'sign_up_page.dart';
 part 'movie_detail_page.dart';
 part 'select_schedule_page.dart';
 part 'select_seat_page.dart';
+part 'checkout_page.dart';
