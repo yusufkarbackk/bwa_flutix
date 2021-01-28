@@ -41,7 +41,7 @@ class TopUp extends UserEvent {
 
 class Purchase extends UserEvent {
   final int amount;
-  Purchase({this.amount});
+  Purchase(this.amount);
 
   @override
   List<Object> get props => [amount];

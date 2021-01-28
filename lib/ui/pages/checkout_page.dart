@@ -320,7 +320,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                         whiteTextFont.copyWith(fontSize: 16)),
                                 onPressed: () {
                                   if (user.balance >= total) {
-                                    // go to success
+                                    FlutixTransaction transaction =
+                                        FlutixTransaction(
+                                            //membuat data transaksi
+                                            userID: user.id,
+                                            title:
+                                                widget.ticket.movieDetail.title,
+                                            subtitle:
+                                                widget.ticket.theater.name,
+                                            time: DateTime.now(),
+                                            amount: -total,
+                                            picture: widget
+                                                .ticket.movieDetail.posterPath);
+
+                                    context.bloc<PageBloc>().add(
+                                        GoToSuccessPage(
+                                            widget.ticket.copyWith(totalPrice: total),
+                                            transaction));
                                   } else {
                                     //go to top up
                                   }

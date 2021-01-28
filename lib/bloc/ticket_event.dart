@@ -7,7 +7,7 @@ abstract class TicketEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetTickets extends Equatable {
+class GetTickets extends TicketEvent {
   final String userID;
 
   GetTickets(this.userID);
@@ -16,11 +16,11 @@ class GetTickets extends Equatable {
   List<Object> get props => [userID];
 }
 
-class BuyTickets extends Equatable {
+class BuyTicket extends TicketEvent {
   final Ticket ticket;
   final String userID;
 
-  BuyTickets(this.ticket, this.userID);
+  BuyTicket(this.ticket, this.userID);
 
   @override
   List<Object> get props => [ticket, userID];

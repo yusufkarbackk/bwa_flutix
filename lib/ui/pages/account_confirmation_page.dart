@@ -3,6 +3,7 @@ part of "pages.dart";
 class AccountConfirmationPage extends StatefulWidget {
   final RegistrationData registrationData;
   AccountConfirmationPage(this.registrationData);
+  
   @override
   _AccountConfirmationPageState createState() =>
       _AccountConfirmationPageState();
