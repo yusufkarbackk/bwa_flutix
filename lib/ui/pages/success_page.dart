@@ -52,18 +52,15 @@ class SuccessPage extends StatelessWidget {
                                 width: 250,
                                 height: 45,
                                 child: RaisedButton(
+                                    child: Text("Enjoy Your Movie!",
+                                        style: whiteTextFont.copyWith(
+                                            fontSize: 16)),
                                     elevation: 0,
-                                    color: Colors.amber,
+                                    color: Color(0xFF3E9D9D),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8)),
-                                    child: Text(
-                                        (ticket != null)
-                                            ? "My Tickets"
-                                            : "My Wallet",
-                                        style: whiteTextFont),
-                                    onPressed: null),
+                                    onPressed: () {}),
                               ),
-                          
                               SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

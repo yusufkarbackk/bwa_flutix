@@ -9,7 +9,7 @@ class TicketServices {
       'movieID': ticket.movieDetail.id ?? "",
       'userID': id ?? "",
       'theaterName': ticket.theater.name,
-      'time': ticket.time.microsecondsSinceEpoch ??
+      'time': ticket.time.millisecondsSinceEpoch ??
           DateTime.now().millisecondsSinceEpoch,
       'bookingCode': ticket.bookingCode,
       'seats': ticket.seatString,
@@ -21,13 +21,16 @@ class TicketServices {
   static Future<List<Ticket>> getTickets(String userID) async {
     QuerySnapshot snapshot = await ticketCollection.getDocuments();
 
-    var documents = snapshot.documents
-        .where((document) => document.data['userID'] == userID);
+    var documents = snapshot.documents.where((document) =>
+        document.data['userID'] ==
+        userID); // mengambil data dari id yang di tentukan
 
     List<Ticket> tickets = [];
     for (var document in documents) {
       MovieDetail movieDetail = await MovieServices.getDetails(null,
-          movieID: document.data['movieID']);
+          movieID:
+              document.data['movieID']); //mengambil detail genre dan langauge
+
       tickets.add(Ticket(
           movieDetail,
           Theater(document.data['theaterName']),
@@ -35,7 +38,7 @@ class TicketServices {
           document.data['bookingCode'],
           document.data['seats'].toString().split(','),
           document.data['name'],
-          document.data['totalPrice']));
+          document.data['totalPrice'])); //memasukan data ke model ticket
     }
     return tickets;
   }

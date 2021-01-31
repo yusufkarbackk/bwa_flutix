@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider.value(
         value: AuthServices.userStream,
-        child: MultiBlocProvider(
+        child: MultiBlocProvider( // menyediakan BloC ke pada child dibawah
+
+        
             providers: [
               BlocProvider(create: (_) => PageBloc()),
               BlocProvider(create: (_) => UserBloc()),

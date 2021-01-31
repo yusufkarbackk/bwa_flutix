@@ -57,7 +57,7 @@ class MovieServices {
             language: language,
             genres: genres
                 .map((e) => (e as Map<String, dynamic>)['name'].toString())
-                .toList());
+                .toList()); //masukan ke model movie details
   }
 
   static Future<List<Credit>> getCredits(int movieID,
