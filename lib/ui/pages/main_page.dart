@@ -57,8 +57,7 @@ class _MainpageState extends State<Mainpage> {
                       color: Colors.black.withOpacity(0.54)),
                 ),
                 onPressed: () {
-                  context.bloc<UserBloc>().add(SignOut());
-                  AuthServices.SignOut();
+                  context.bloc<PageBloc>().add(GoToTopUpPage(GoToMainPage()));
                 },
               ),
             )),

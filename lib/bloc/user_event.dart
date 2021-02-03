@@ -33,7 +33,7 @@ class UpdateData extends UserEvent {
 
 class TopUp extends UserEvent {
   final int amount;
-  TopUp({this.amount});
+  TopUp(this.amount);
 
   @override
   List<Object> get props => [amount];

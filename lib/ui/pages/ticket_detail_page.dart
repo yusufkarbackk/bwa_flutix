@@ -79,9 +79,14 @@ class TicketDetailPage extends StatelessWidget {
                               children: [
                                 Text("Cinema",
                                     style: greyTextFont.copyWith(fontSize: 16)),
-                                Text(ticket.theater.name,
-                                    style:
-                                        blackTextFont.copyWith(fontSize: 16)),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.45,
+                                  child: Text(ticket.theater.name,
+                                      style:
+                                          blackTextFont.copyWith(fontSize: 16),
+                                      textAlign: TextAlign.end),
+                                ),
                               ]),
                           SizedBox(height: 8),
                           Row(
@@ -99,19 +104,31 @@ class TicketDetailPage extends StatelessWidget {
                               children: [
                                 Text("Seat Number",
                                     style: greyTextFont.copyWith(fontSize: 16)),
-                                Text(ticket.seatString,
-                                    style:
-                                        blackTextFont.copyWith(fontSize: 16)),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.45,
+                                  child: Text(ticket.seatString,
+                                      style:
+                                          blackTextFont.copyWith(fontSize: 16),
+                                      textAlign: TextAlign.end),
+                                ),
                               ]),
                           SizedBox(height: 8),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Cinema",
+                                Text("ID Order",
                                     style: greyTextFont.copyWith(fontSize: 16)),
-                                Text(ticket.theater.name,
-                                    style:
-                                        blackTextFont.copyWith(fontSize: 16)),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.45,
+                                  child: Text(
+                                    ticket.bookingCode,
+                                    style: blackTextFont.copyWith(fontSize: 16),
+                                    maxLines: 2,
+                                    textAlign: TextAlign.end,
+                                  ),
+                                ),
                               ]),
                           SizedBox(height: 19),
                           Divider(color: Color(0xFFE4E4E4), thickness: 1),
@@ -140,7 +157,6 @@ class TicketDetailPage extends StatelessWidget {
                                           .format(ticket.totalPrice),
                                       style: whiteNumberFont.copyWith(
                                           color: Colors.black, fontSize: 16)),
-                                  
                                 ],
                               ),
                               QrImage(
