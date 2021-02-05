@@ -52,14 +52,25 @@ class SuccessPage extends StatelessWidget {
                                 width: 250,
                                 height: 45,
                                 child: RaisedButton(
-                                    child: Text("Enjoy Your Movie!",
+                                    child: Text(
+                                        (ticket == null)
+                                            ? "My Wallet"
+                                            : "My Tickets",
                                         style: whiteTextFont.copyWith(
                                             fontSize: 16)),
                                     elevation: 0,
                                     color: Color(0xFF3E9D9D),
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8)),
-                                    onPressed: () {}),
+                                    onPressed: () {
+                                      if (ticket == null) {
+                                        context.bloc<PageBloc>().add(
+                                            GoToWalletPage(GoToMainPage()));
+                                      }
+                                      else{
+                                        // TODO: go to ticket page
+                                      }
+                                    }),
                               ),
                               SizedBox(height: 10),
                               Row(

@@ -10,7 +10,6 @@ part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   @override
-  // TODO: implement initialState
   MovieState get initialState => MovieInitial();
 
   @override

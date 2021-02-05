@@ -97,35 +97,45 @@ class _ProfilePageState extends State<ProfilePage> {
                                 top: 30,
                                 left: defaultMargin,
                                 right: defaultMargin),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/account_circle_24px_outlined.png"),
+                            child: BlocBuilder<UserBloc, UserState>(
+                              builder: (_, userState) => GestureDetector(
+                                onTap: () {
+                                  context.bloc<PageBloc>().add(
+                                      GoToEditProfilePage(
+                                          (userState as UserLoaded).user));
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/account_circle_24px_outlined.png"),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    SizedBox(width: 10),
+                                    Text("Edit Profile",
+                                        style: whiteTextFont.copyWith(
+                                            fontSize: 16)),
+                                    Align(
+                                        alignment: Alignment.centerRight,
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              context
+                                                  .bloc<PageBloc>()
+                                                  .add(GoToMainPage());
+                                            },
+                                            child: Icon(
+                                                Icons
+                                                    .keyboard_arrow_right_rounded,
+                                                color: Colors.white)))
+                                  ],
                                 ),
-                                SizedBox(width: 10),
-                                Text("Edit Profile",
-                                    style:
-                                        whiteTextFont.copyWith(fontSize: 16)),
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          context
-                                              .bloc<PageBloc>()
-                                              .add(GoToMainPage());
-                                        },
-                                        child: Icon(
-                                            Icons.keyboard_arrow_right_rounded,
-                                            color: Colors.white)))
-                              ],
+                              ),
                             ),
                           ),
                           Container(
@@ -133,35 +143,43 @@ class _ProfilePageState extends State<ProfilePage> {
                                 top: 30,
                                 left: defaultMargin,
                                 right: defaultMargin),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/account_balance_wallet_24px_outlined.png"),
+                            child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .bloc<PageBloc>()
+                                    .add(GoToWalletPage(GoToProfilePage()));
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/account_balance_wallet_24px_outlined.png"),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 10),
-                                Text("My Wallet",
-                                    style:
-                                        whiteTextFont.copyWith(fontSize: 16)),
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          context
-                                              .bloc<PageBloc>()
-                                              .add(GoToMainPage());
-                                        },
-                                        child: Icon(
-                                            Icons.keyboard_arrow_right_rounded,
-                                            color: Colors.white)))
-                              ],
+                                  SizedBox(width: 10),
+                                  Text("My Wallet",
+                                      style:
+                                          whiteTextFont.copyWith(fontSize: 16)),
+                                  Align(
+                                      alignment: Alignment.centerRight,
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            context
+                                                .bloc<PageBloc>()
+                                                .add(GoToMainPage());
+                                          },
+                                          child: Icon(
+                                              Icons
+                                                  .keyboard_arrow_right_rounded,
+                                              color: Colors.white)))
+                                ],
+                              ),
                             ),
                           ),
                           Container(

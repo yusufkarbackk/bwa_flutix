@@ -16,18 +16,20 @@ class FlutixTransactionServices {
     });
   }
 
-  static Future<List<FlutixTransaction>> getTRansactions(String userID) async {
+  static Future<List<FlutixTransaction>> getTransactions(String userID) async {
     QuerySnapshot snapshot = await transactionCollection.getDocuments();
 
-    var documents =
-        snapshot.documents.where((document) => document.data['userID']);
+    var documents = snapshot.documents
+        .where((document) => document.data['userID'] == userID);
 
-    return documents.map((e) => FlutixTransaction(
-        userID: e.data['userID'],
-        title: e.data['title'],
-        subtitle: e.data['subtitle'],
-        time: DateTime.fromMillisecondsSinceEpoch(e.data['time']),
-        amount: e.data['amount'],
-        picture: e.data['picture']));
+    return documents
+        .map((e) => FlutixTransaction(
+            userID: e.data['userID'],
+            title: e.data['title'],
+            subtitle: e.data['subtitle'],
+            time: DateTime.fromMillisecondsSinceEpoch(e.data['time']),
+            amount: e.data['amount'],
+            picture: e.data['picture']))
+        .toList();
   }
 }

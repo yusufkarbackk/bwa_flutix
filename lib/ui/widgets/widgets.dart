@@ -15,3 +15,4 @@ part 'promo_card.dart';
 part 'cast.dart';
 part 'date_card.dart';
 part 'money_card.dart';
+part 'transactions_card.dart';

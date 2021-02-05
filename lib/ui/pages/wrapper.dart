@@ -59,6 +59,16 @@ class Wrapper extends StatelessWidget {
                                                             ? TopUpPage(
                                                                 pagestate
                                                                     .pageEvent)
-                                                            : Mainpage());
+                                                            : (pagestate
+                                                                    is OnWalletPage)
+                                                                ? WalletPage(
+                                                                    pagestate
+                                                                        .pageEvent)
+                                                                : (pagestate
+                                                                        is OnEditProfilePage)
+                                                                    ? EditProfilePage(
+                                                                        pagestate
+                                                                            .user)
+                                                                    : Mainpage());
   }
 }
