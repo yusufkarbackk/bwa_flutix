@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:random_string/random_string.dart';
 import 'package:bwa_flutix/extensions/extensions.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:path/path.dart';
 
 part 'sign_in_page.dart';
 part 'wrapper.dart';

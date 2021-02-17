@@ -69,6 +69,11 @@ class Wrapper extends StatelessWidget {
                                                                     ? EditProfilePage(
                                                                         pagestate
                                                                             .user)
-                                                                    : Mainpage());
+                                                                    : MainPage(
+                                                                        bottomNavBarIndex:
+                                                                            (pagestate as OnMainPage).bottomNavBarIndex,
+                                                                        isExpired:
+                                                                            (pagestate as OnMainPage).isExpired,
+                                                                      ));
   }
 }

@@ -66,9 +66,8 @@ class SuccessPage extends StatelessWidget {
                                       if (ticket == null) {
                                         context.bloc<PageBloc>().add(
                                             GoToWalletPage(GoToMainPage()));
-                                      }
-                                      else{
-                                        // TODO: go to ticket page
+                                      } else {
+                                        context.bloc<PageBloc>().add(GoToMainPage(bottomNavBarIndex: 1));
                                       }
                                     }),
                               ),

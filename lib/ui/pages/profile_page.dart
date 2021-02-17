@@ -123,16 +123,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontSize: 16)),
                                     Align(
                                         alignment: Alignment.centerRight,
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              context
-                                                  .bloc<PageBloc>()
-                                                  .add(GoToMainPage());
-                                            },
-                                            child: Icon(
-                                                Icons
-                                                    .keyboard_arrow_right_rounded,
-                                                color: Colors.white)))
+                                        child: Icon(
+                                            Icons
+                                                .keyboard_arrow_right_rounded,
+                                            color: Colors.white))
                                   ],
                                 ),
                               ),

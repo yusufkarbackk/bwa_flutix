@@ -1,68 +1,79 @@
 part of 'pages.dart';
 
-class Mainpage extends StatefulWidget {
+class MainPage extends StatefulWidget {
+  final int bottomNavBarIndex;
+  final bool isExpired;
+
+  MainPage({this.bottomNavBarIndex = 0, this.isExpired = false});
+
   @override
-  _MainpageState createState() => _MainpageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MainpageState extends State<Mainpage> {
+class _MainPageState extends State<MainPage> {
   int bottomNavBarIndex;
   PageController pageController;
 
   @override
   void initState() {
     super.initState();
-    bottomNavBarIndex = 0;
+
+    bottomNavBarIndex = widget.bottomNavBarIndex;
     pageController = PageController(initialPage: bottomNavBarIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        Container(
-          color: accentColor1,
-        ),
-        SafeArea(
-            child: Container(
-          color: Color(0xFFF6F7F9),
-        )),
-        PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              bottomNavBarIndex = index;
-            });
-          },
-          children: [
-            MoviePage(),
-            TicketPage(),
-          ],
-        ),
-        createCustomBottomNavBar(),
-        Align(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            color: accentColor1,
+          ),
+          SafeArea(
+              child: Container(
+            color: Color(0xFFF6F7F9),
+          )),
+          PageView(
+            controller: pageController,
+            onPageChanged: (index) {
+              setState(() {
+                bottomNavBarIndex = index;
+              });
+            },
+            children: <Widget>[
+              MoviePage(),
+              TicketPage(
+                isExpiredTicket: widget.isExpired,
+              )
+            ],
+          ),
+          createCustomBottomNavBar(),
+          Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: 46,
               width: 46,
               margin: EdgeInsets.only(bottom: 42),
               child: FloatingActionButton(
-                elevation: 0,
-                backgroundColor: accentColor2,
-                child: SizedBox(
-                  height: 26,
-                  width: 26,
-                  child: Icon(MdiIcons.walletPlus,
-                      color: Colors.black.withOpacity(0.54)),
-                ),
-                onPressed: () {
-                  context.bloc<PageBloc>().add(GoToTopUpPage(GoToMainPage()));
-                },
-              ),
-            )),
-      ],
-    ));
+                  elevation: 0,
+                  backgroundColor: accentColor2,
+                  child: SizedBox(
+                    height: 26,
+                    width: 26,
+                    child: Icon(
+                      MdiIcons.walletPlus,
+                      color: Colors.black.withOpacity(0.54),
+                    ),
+                  ),
+                  onPressed: () {
+                    context.bloc<PageBloc>().add(GoToTopUpPage(GoToMainPage()));
+                  }),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget createCustomBottomNavBar() => Align(
@@ -90,29 +101,27 @@ class _MainpageState extends State<Mainpage> {
                 },
                 items: [
                   BottomNavigationBarItem(
-                    title: Text("New Movies",
-                        style: GoogleFonts.raleway(
-                            fontSize: 13, fontWeight: FontWeight.w600)),
-                    icon: Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      height: 20,
-                      child: Image.asset((bottomNavBarIndex == 0)
-                          ? "assets/Frame 7.png"
-                          : "assets/Frame 9.png"),
-                    ),
-                  ),
+                      title: Text("New Movies",
+                          style: GoogleFonts.raleway(
+                              fontSize: 13, fontWeight: FontWeight.w600)),
+                      icon: Container(
+                        margin: EdgeInsets.only(bottom: 6),
+                        height: 20,
+                        child: Image.asset((bottomNavBarIndex == 0)
+                            ? "assets/Frame 7.png"
+                            : "assets/Frame 9.png"),
+                      )),
                   BottomNavigationBarItem(
-                    title: Text("My Tickets",
-                        style: GoogleFonts.raleway(
-                            fontSize: 13, fontWeight: FontWeight.w600)),
-                    icon: Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      height: 20,
-                      child: Image.asset((bottomNavBarIndex == 1)
-                          ? "assets/Frame 10.png"
-                          : "assets/Frame 11.png"),
-                    ),
-                  )
+                      title: Text("My Tickets",
+                          style: GoogleFonts.raleway(
+                              fontSize: 13, fontWeight: FontWeight.w600)),
+                      icon: Container(
+                        margin: EdgeInsets.only(bottom: 6),
+                        height: 20,
+                        child: Image.asset((bottomNavBarIndex == 1)
+                            ? "assets/Frame 10.png"
+                            : "assets/Frame 11.png"),
+                      ))
                 ]),
           ),
         ),
@@ -121,7 +130,7 @@ class _MainpageState extends State<Mainpage> {
 
 class BottomNavBarClipper extends CustomClipper<Path> {
   @override
-  getClip(Size size) {
+  Path getClip(Size size) {
     Path path = Path();
 
     path.lineTo(size.width / 2 - 28, 0);

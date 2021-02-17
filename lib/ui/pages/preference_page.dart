@@ -90,9 +90,9 @@ class _PreferencePageState extends State<PreferencePage> {
                         widget.registrationData.selectedGenres = selectedGenres;
                         widget.registrationData.selectedLang = selectedLanguage;
 
-                        context
-                            .bloc<PageBloc>()
-                            .add(GoToAccountConfirmationPage(widget.registrationData));
+                        context.bloc<PageBloc>().add(
+                            GoToAccountConfirmationPage(
+                                widget.registrationData));
                         return;
                       }
                     },
@@ -123,7 +123,7 @@ class _PreferencePageState extends State<PreferencePage> {
         .toList();
   }
 
-  List<Widget> generateLangWidgets(BuildContextcontext) {
+  List<Widget> generateLangWidgets(BuildContext context) {
     double width =
         (MediaQuery.of(context).size.width - 2 * defaultMargin - 24) / 2;
 
